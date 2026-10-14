@@ -1,0 +1,15 @@
+export type Network = 'Ethereum' | 'Polygon' | 'Base'
+export type Category = 'Arte' | '3D' | 'Fotografia' | 'Música'
+export type Nft = { id: string; title: string; creator: string; description: string; category: Category; network: Network; price: string; supply: number; image: string; edition: string; version: number; featured: boolean }
+export type CatalogParams = { q: string; category: string; network: string; sort: string; page: number }
+export type CatalogPage = { items: Nft[]; total: number; pages: number; page: number }
+export type User = { id: string; name: string; email: string; avatar: string }
+export type Wallet = { id: string; label: string; address: string; network: Network; primary: boolean }
+export type CartItem = { nftId: string; quantity: number }
+export type CartViewItem = CartItem & { nft: Nft }
+export type QuoteItem = { nftId: string; title: string; quantity: number; unitPrice: string; image: string; version: number }
+export type Quote = { id: string; items: QuoteItem[]; subtotal: string; discount: string; fee: string; total: string; coupon: string | null; network: Network; expiresAt: number }
+export type Order = { id: string; userId: string; collector:{name:string;email:string}; quote: Quote; walletId: string; status: 'pending' | 'confirmed' | 'declined'; txRef: string; createdAt: number; version: number }
+export type ApiError = { code: string; message: string }
+export type NftUpdate = { resourceId: string; version: number; resource: Nft }
+export type OrderUpdate = { resourceId: string; userId: string; version: number; status: Order['status'] }

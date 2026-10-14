@@ -1,0 +1,87 @@
+@import "tailwindcss";
+:root{
+  --kurio-bg:#120d0a;--kurio-panel:#241710;--kurio-panel-alt:#301e13;
+  --kurio-copper:#d9904c;--kurio-highlight:#f4ab64;--kurio-ink:#1c1009;
+  --kurio-cream:#f3e8d6;--kurio-muted:#baa089;--kurio-line:#39271b;
+  font-family:ui-monospace,"Cascadia Code",Consolas,"Liberation Mono",monospace;
+  color:var(--kurio-cream);background:var(--kurio-bg);font-synthesis:none;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{min-width:320px;margin:0;background:var(--kurio-bg);color:var(--kurio-cream);font-size:13px}button,select,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed}a{text-decoration:none;color:inherit}
+::selection{background:var(--kurio-copper);color:#170e08}
+:focus-visible{outline:2px solid var(--kurio-highlight);outline-offset:3px}
+.surface{background:#1e140f;border:1px solid var(--kurio-line);border-radius:4px}
+.label{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--kurio-copper)}
+.muted{color:var(--kurio-muted)}.section-title{font-size:clamp(21px,2.4vw,31px);font-weight:750;letter-spacing:-.04em}
+.shimmer{background:linear-gradient(100deg,#241811 8%,#4a3122 18%,#241811 33%);background-size:220% 100%;animation:shimmer 1.35s infinite linear}@keyframes shimmer{to{background-position-x:-220%}}
+body :is(input,select,textarea){border-color:#513722;border-radius:3px;background-color:#20140e;color:var(--kurio-cream)}
+body :is(input,select,textarea)::placeholder{color:#94755b}select option{background:#25170f;color:var(--kurio-cream)}
+.text-violet-200,.text-violet-300,.text-violet-400,.text-pink-400,.text-fuchsia-300{color:var(--kurio-copper)!important}
+.bg-violet-500,.bg-violet-600{background-color:var(--kurio-copper)!important;color:var(--kurio-ink)!important}
+.border-violet-400,.border-violet-500{border-color:var(--kurio-copper)!important}
+.focus-visible\:ring-violet-400:focus-visible{--tw-ring-color:var(--kurio-copper)!important}
+.kurio-header{background:rgba(18,13,10,.96);border-bottom-color:#362317}
+.kurio-header-inner{height:65px;max-width:1200px}.kurio-header-inner>a:first-child{font-size:18px;letter-spacing:.28em;font-weight:900}
+.kurio-nav{font-size:11px;gap:24px}.kurio-nav>a:first-child{color:var(--kurio-copper)}
+.kurio-header a:hover,.kurio-header button:hover{color:var(--kurio-highlight)}
+.kurio-main{max-width:1200px;padding-top:24px;padding-bottom:66px}
+.kurio-footer{background:#23150c;color:#ad957d;border-top:1px solid #3b2414;font-size:10px;padding:26px 15px}
+.kurio-hero{display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:6%;min-height:338px;padding:12px 6% 30px 4%;margin-bottom:34px;position:relative;background:linear-gradient(110deg,#120d0a,#1a110c 70%,#24150e);border-bottom:1px solid #2f1e14;overflow:hidden}
+.kurio-hero-copy{max-width:610px;position:relative;z-index:1}.kurio-overline{font-size:11px;color:#cb9a6f;letter-spacing:.16em;margin-bottom:16px}
+.kurio-hero h1{font-size:clamp(28px,4vw,49px);line-height:1.2;font-weight:900;letter-spacing:-.06em;color:#fffaf2}
+.kurio-hero-copy>p:nth-of-type(2){font-size:12px;line-height:1.85;color:#b39982;max-width:420px;margin:17px 0 23px}
+.kurio-hero-image{width:100%;height:275px;max-width:300px;object-fit:cover;border-radius:8px;justify-self:end;box-shadow:0 18px 65px #0005}
+.kurio-hero-dots{color:var(--kurio-copper);margin-top:30px;letter-spacing:4px}.kurio-hero-dots>span{color:#573d28}
+.kurio-action{display:inline-flex;gap:8px;align-items:center;justify-content:center;background:var(--kurio-copper);color:var(--kurio-ink);min-height:34px;padding:8px 18px;font-size:10px;font-weight:900;letter-spacing:.04em;border-radius:3px;transition:background .15s}
+.kurio-action:hover{background:var(--kurio-highlight)}
+.kurio-main-layout{display:grid;grid-template-columns:205px minmax(0,1fr);gap:30px;scroll-margin-top:100px}
+.kurio-sidebar{background:#261810;border:1px solid #392316;padding:22px 17px;align-self:start;display:flex;flex-direction:column;gap:11px}
+.kurio-sidebar-title{display:flex;justify-content:space-between;gap:10px;margin:5px 0 2px;font-weight:700;font-size:11px;color:#eedbc3}
+.kurio-sidebar-title button{font-size:10px;color:var(--kurio-copper)}.kurio-sidebar-cats{display:flex;flex-direction:column;margin:0 0 14px;gap:7px}
+.kurio-sidebar-cats button{font-size:11px;color:#bfa38b;display:flex;justify-content:space-between;gap:12px;text-align:left;padding:4px 0}.kurio-sidebar-cats button[aria-pressed=true]{color:var(--kurio-highlight);font-weight:bold}
+.kurio-sidebar select{width:100%;padding:9px 7px;color:#d9bda3;background:#1b100a!important;border:1px solid #47301f;font-size:11px;margin-bottom:8px}
+.kurio-catalog{min-width:0}.kurio-catalog-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #3f291a;padding:2px 0 14px}
+.kurio-tabs{display:flex;gap:19px;font-size:11px;white-space:nowrap}.kurio-tabs span{color:#baa28c}.kurio-tabs .kurio-tab-active{color:var(--kurio-copper);font-weight:bold}
+.kurio-search{display:flex;align-items:center;gap:8px;border:1px solid #422c1d;padding:6px 10px;border-radius:3px;color:#c68e59;min-width:210px;max-width:270px;flex:1}
+.kurio-search input{min-width:0;width:100%;background:transparent!important;border:0!important;outline:0!important;color:#f0d2b2;font-size:10px}
+.kurio-filter-toggle{display:none;color:var(--kurio-copper)}.kurio-results-line{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:#aa907c;margin:12px 0 17px}
+.kurio-nft-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px 15px}
+.kurio-nft-card.surface{background:transparent;border:0;border-radius:0}.kurio-nft-card:hover{transform:translateY(-3px)}
+.kurio-nft-card>div:first-child{border-radius:6px;overflow:hidden}.kurio-nft-card>div:first-child img{border-radius:6px;aspect-ratio:1/1}
+.kurio-nft-card>div:nth-child(2){padding:9px 1px 0}.kurio-nft-card>div:nth-child(2)>p:first-child{display:none}
+.kurio-nft-card>div:nth-child(2)>a{font-size:12px;font-weight:650;color:#f7e7d4}
+.kurio-nft-card>div:nth-child(2)>div{padding:0;margin:5px 0 0;border:0}
+.kurio-nft-card>div:nth-child(2)>div>div>p:first-child{display:none}
+.kurio-nft-card>div:nth-child(2)>div>div>p:last-child{font-size:11px;color:var(--kurio-copper);font-weight:800}
+.kurio-nft-card>div:nth-child(2)>div>a{color:var(--kurio-copper);background:#2a1b10;width:29px;height:29px;border-radius:3px}
+.kurio-nft-card>div:first-child>div:last-child{border-radius:3px;background:#d9904c;color:#231308;border:0;font-size:9px}
+.kurio-pagination{margin:30px 0;display:flex;align-items:center;justify-content:center;gap:14px;font-size:11px;color:#d69e70}
+.kurio-notice{color:#f0b577;margin-bottom:14px}
+.kurio-editorial{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:83px;margin-bottom:75px}
+.kurio-editorial-card{display:grid;grid-template-columns:44% 56%;background:#251810;min-height:182px}.kurio-editorial-card>img{width:100%;height:100%;max-height:205px;object-fit:cover}.kurio-editorial-card>div{padding:22px 17px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}.kurio-editorial-card h2{font-size:15px;font-weight:800;line-height:1.4}.kurio-editorial-card p{font-size:10px;line-height:1.7;color:#ab8e73;margin:10px 0}.kurio-editorial-card a{color:var(--kurio-copper);font-size:10px;display:inline-flex;align-items:center;gap:6px}
+.kurio-journal{text-align:center;margin-bottom:60px}.kurio-journal h2{font-size:22px;font-weight:800;letter-spacing:-.035em}.kurio-journal>p{font-size:10px;color:#b18d6f;margin:10px 0 22px}.kurio-journal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;text-align:left}.kurio-journal-grid article{background:#24150e;min-width:0;padding-bottom:17px}.kurio-journal-grid img{aspect-ratio:1.2;object-fit:cover;width:100%;height:auto}.kurio-journal-grid h3{font-size:12px;color:#f1e2d2;font-weight:bold;margin:11px 11px 5px}.kurio-journal-grid p{font-size:10px;line-height:1.6;color:#c6a88c;margin:0 11px}
+.kurio-benefits{display:grid;grid-template-columns:repeat(4,1fr);margin:40px 0 0;background:#2a1a11;padding:26px 16px;gap:0}.kurio-benefits>div{padding:5px 17px;border-right:1px solid #694328}.kurio-benefits>div:last-child{border:0}.kurio-benefits svg{color:var(--kurio-copper);margin-bottom:9px}.kurio-benefits h3{font-size:12px;font-weight:800}.kurio-benefits p{font-size:10px;color:#c6a488;line-height:1.65;margin:8px 0 13px}
+/* Reuse Kurio visual tokens on account, cart, checkout and receipt screens. */
+.kurio-main h1{letter-spacing:-.04em}.kurio-main .surface h1{color:#fff0dd}
+.kurio-main .surface{box-shadow:none}.kurio-main .surface img{border-radius:3px}
+.kurio-main .rounded-xl,.kurio-main .rounded-2xl,.kurio-main .rounded-3xl{border-radius:5px}
+.kurio-main .bg-\[\#242038\]{background-color:#21140e!important}
+.kurio-main .bg-\[\#19182a\]{background-color:#23150f!important}
+.kurio-main .text-slate-400,.kurio-main .text-slate-300,.kurio-main .text-slate-500{color:#af927b}
+.kurio-main button:not(:disabled):hover,.kurio-main a:hover{transition:color .15s,background .15s}
+@media (max-width:1000px){.kurio-header-inner{height:62px}.kurio-main-layout{grid-template-columns:175px minmax(0,1fr);gap:20px}.kurio-tabs{gap:10px}.kurio-search{min-width:170px}.kurio-editorial{margin-top:55px}}
+@media(max-width:767px){
+  .kurio-header-inner{height:58px}.kurio-header-inner>a:first-child{font-size:15px}.kurio-main{padding:12px 15px 64px}
+  .kurio-hero{min-height:0;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:13px;padding:16px 12px;margin:0 0 20px;background:#251811;border-radius:6px}
+  .kurio-hero h1{font-size:17px;line-height:1.32;letter-spacing:-.06em}
+  .kurio-overline{font-size:9px;margin-bottom:7px}.kurio-hero-copy>p:nth-of-type(2){font-size:9px;line-height:1.4;margin:8px 0 10px}
+  .kurio-hero-image{height:auto;aspect-ratio:1;object-fit:cover;border-radius:6px}.kurio-action{font-size:9px;min-height:29px;padding:6px 10px}
+  .kurio-hero-dots{display:none}.kurio-main-layout{display:block;position:relative}.kurio-sidebar{display:none;margin-bottom:14px;gap:6px}.kurio-sidebar-open{display:flex}
+  .kurio-catalog-toolbar{gap:8px}.kurio-tabs{font-size:10px;gap:10px;overflow:hidden}.kurio-tabs span:nth-child(n+3){display:none}.kurio-search{min-width:0;flex:1;max-width:150px;padding:5px}.kurio-search input{font-size:9px}
+  .kurio-filter-toggle{display:grid;place-items:center;width:34px;height:34px;background:#2d1c10;border-radius:4px}
+  .kurio-nft-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 11px}.kurio-nft-card>div:nth-child(2)>a{font-size:11px}.kurio-nft-card>div:nth-child(2)>div>div>p:last-child{font-size:10px}
+  .kurio-editorial{gap:10px;margin-top:40px;margin-bottom:40px;grid-template-columns:1fr}.kurio-editorial-card{min-height:130px}.kurio-editorial-card>div{padding:12px}.kurio-editorial-card h2{font-size:13px}.kurio-editorial-card p{font-size:9px}
+  .kurio-journal-grid{grid-template-columns:repeat(2,1fr);gap:12px}.kurio-benefits{grid-template-columns:repeat(2,1fr);gap:12px 0;padding:16px 8px}.kurio-benefits>div:nth-child(2){border:0}.kurio-benefits>div{padding:8px 12px}
+  .kurio-main .grid.lg\:grid-cols-\[1fr_360px\],.kurio-main .grid.lg\:grid-cols-\[1fr_370px\]{grid-template-columns:1fr}
+}
+@media(max-width:380px){.kurio-tabs span:nth-child(2){display:none}.kurio-hero h1{font-size:15px}.kurio-main{padding-left:11px;padding-right:11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

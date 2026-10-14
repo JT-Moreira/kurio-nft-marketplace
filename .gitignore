@@ -1,0 +1,14 @@
+node_modules
+dist
+.env.local
+playwright-report
+test-results
+lighthouse-reports
+.DS_Store
+
+.env
+.env.*
+!.env.example
+.vercel/
+*.pem
+*.key
