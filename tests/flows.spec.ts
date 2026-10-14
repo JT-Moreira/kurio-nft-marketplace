@@ -37,7 +37,7 @@ async function signIn(page: Page) {
 test.beforeEach(async({page})=>reset(page))
 
 test('busca, filtros, paginação e histórico de URL',async({page})=>{
- await page.getByPlaceholder('Busque arte, coleção ou criador...').fill('Emerald');await expect(page).toHaveURL(/q=Emerald/);await expect(page.getByText('Emerald Ape #042').first()).toBeVisible();await page.getByRole('combobox',{name:'Filtrar categoria'}).selectOption('Arte');await expect(page).toHaveURL(/category=Arte/);await page.getByPlaceholder('Busque arte, coleção ou criador...').fill('');await expect(page.getByText('NFTs encontrados')).toBeVisible();await page.goBack();await expect(page).toHaveURL(/q=Emerald/)
+ await page.getByPlaceholder('Busque arte, coleção ou criador...').fill('Emerald');await expect(page).toHaveURL(/q=Emerald/);await expect(page.getByText('Emerald Ape #042').first()).toBeVisible();if (await page.getByRole('button',{name:'Exibir filtros'}).isVisible()) { await page.getByRole('button',{name:'Exibir filtros'}).click() };await page.getByRole('combobox',{name:'Filtrar categoria'}).selectOption('Arte');await expect(page).toHaveURL(/category=Arte/);await page.getByPlaceholder('Busque arte, coleção ou criador...').fill('');await expect(page.getByText('NFTs encontrados')).toBeVisible();await page.goBack();await expect(page).toHaveURL(/q=Emerald/)
 })
 test('detalhe direto e NFT inexistente',async({page})=>{await page.goto('/nft/nft-01');await expect(page.getByRole('heading',{name:'Emerald Ape #042'})).toBeVisible();await page.goto('/nft/nao-existe');await expect(page.getByText('NFT não encontrado.')).toBeVisible()})
 test('carrinho sobrevive refresh e calcula cupom pela API',async({page})=>{await addFirst(page);await expect(page.getByRole('heading',{name:'Meu carrinho'})).toBeVisible();await page.reload();await expect(page.getByText('Emerald Ape #042').first()).toBeVisible();await page.getByPlaceholder('Código de desconto').fill('AURORA10');await page.getByRole('button',{name:'Aplicar'}).click();await expect(page.getByText('Desconto', { exact: true })).toBeVisible()})
@@ -46,10 +46,17 @@ test('login recupera carrinho de visitante e logout protege a conta',async({page
  await signIn(page)
  await page.goto('/cart')
  await expect(page.getByText('Emerald Ape #042').first()).toBeVisible()
- await page.getByRole('button',{name:'Sair da conta'}).click()
+ const mobileMenu = page.getByRole('button',{name:'Abrir navegação'})
+if (await mobileMenu.isVisible()) {
+  await mobileMenu.click()
+  await page.getByRole('button',{name:'Sair',exact:true}).click()
+} else {
+  await page.getByRole('button',{name:'Sair da conta'}).click()
+}
  // Verify the credential really disappears before testing access to a private route.
  await expect.poll(()=>page.evaluate(()=>localStorage.getItem('aurora_session_token'))).toBeNull()
- await expect(page.getByRole('link',{name:'Entrar',exact:true})).toBeVisible()
+ if (await mobileMenu.isVisible()) await mobileMenu.click()
+await expect(page.getByRole('link',{name:'Entrar',exact:true})).toBeVisible()
  await page.goto('/profile')
  await expect(page).toHaveURL(/\/login/)
  await expect(page.getByRole('heading',{name:'Acesse sua conta'})).toBeVisible()
@@ -84,7 +91,19 @@ test('navegação principal acessível por teclado',async({page})=>{
   // Inicia em um ponto estável da ordem de tabulação e percorre com Tab real.
   await page.getByRole('link',{name:'KURIO'}).focus()
   await page.keyboard.press('Tab')
+  const mobileMenu = page.getByRole('button',{name:'Abrir navegação'})
+if (await mobileMenu.isVisible()) {
+  await expect(page.getByRole('link',{name:/Carrinho com \d+ itens/})).toBeFocused()
+  await page.keyboard.press('Tab')
+  await expect(mobileMenu).toBeFocused()
+  await page.keyboard.press('Enter')
+  await expect(page.getByRole('link',{name:'Explorar',exact:true})).toBeVisible()
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('link',{name:'Explorar',exact:true})).toBeFocused()
+  await page.getByRole('button',{name:'Exibir filtros'}).click()
+} else {
   await expect(page.getByRole('link',{name:'Início',exact:true})).toBeFocused()
+}
   await page.getByRole('combobox',{name:'Filtrar categoria'}).focus()
   await expect(page.getByRole('combobox',{name:'Filtrar categoria'})).toBeFocused()
 })
