@@ -8,7 +8,7 @@ import type { NftUpdate, OrderUpdate } from '../types'
 // ao publicar o site em HTTPS e elimina dependências de localhost:8788.
 const socketOrigin = new URL(import.meta.env.VITE_SOCKET_URL || window.location.origin)
 socketOrigin.protocol = socketOrigin.protocol === 'https:' || socketOrigin.protocol === 'wss:' ? 'wss:' : 'ws:'
-socketOrigin.pathname = '/socket.io/'
+socketOrigin.pathname = '/'
 socketOrigin.search = ''
 socketOrigin.hash = ''
 const socket = ws.link(socketOrigin.toString())
