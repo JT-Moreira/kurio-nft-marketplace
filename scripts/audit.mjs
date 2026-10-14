@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import lighthouse from 'lighthouse'
+import desktopConfig from 'lighthouse/core/config/desktop-config.js'
 import * as chromeLauncher from 'chrome-launcher'
 import { chromium } from '@playwright/test'
 
@@ -12,9 +13,9 @@ try {
  for(const path of ['','/nft/nft-01']) for(const profile of ['mobile','desktop']){
    const score=[]
    for(let i=1;i<=3;i++){
-     const config=profile==='desktop'?{extends:'lighthouse:default',settings:{formFactor:'desktop',screenEmulation:{mobile:false,width:1440,height:900,deviceScaleFactor:1,disabled:false}}}:undefined
+     const config=profile==='desktop'?{...desktopConfig,settings:{...desktopConfig.settings,screenEmulation:{...desktopConfig.settings.screenEmulation,width:1440,height:900}}}:undefined
      const result=await lighthouse(root+path,{port:chrome.port,output:['html','json'],onlyCategories:['performance','accessibility','best-practices','seo'],logLevel:'error'},config)
-     if(!result)throw new Error('Lighthouse não retornou resultado')
+     if(!result)throw new Error('Lighthouse nÃ£o retornou resultado')
      const key=`${path? 'detalhe':'inicio'}-${profile}-${i}`
      await fs.writeFile(`${out}/${key}.html`,result.report[0])
      await fs.writeFile(`${out}/${key}.json`,result.report[1])
