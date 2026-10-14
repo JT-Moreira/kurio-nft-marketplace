@@ -42,9 +42,9 @@ npm run audit
 
 ## Credenciais fictícias
 
-| Conta | E-mail | Senha |
-| --- | --- | --- |
-| Demo 1 | `demo@aurora.dev` | `Demo123!` |
+| Conta  | E-mail                    | Senha       |
+| ------ | ------------------------- | ----------- |
+| Demo 1 | `demo@aurora.dev`         | `Demo123!`  |
 | Demo 2 | `colecionador@aurora.dev` | `Teste123!` |
 
 As senhas de usuários são representadas por hashes na persistência simulada, nunca em texto claro. **Essa simulação não é um sistema seguro para produção**; autenticação e hashing reais devem ocorrer no backend.
@@ -85,14 +85,15 @@ Não confunda o `VITE_SOCKET_URL` com um servidor de rede existente: o Service W
 
 ### Lighthouse - mediana de 3 medições por cenário
 
-| Página | Perfil | Performance | Accessibility | Best Practices | SEO |
-| --- | --- | ---: | ---: | ---: | ---: |
-| Home | Mobile | 90 | 100 | 96 | 92 |
-| Home | Desktop | 99 | 100 | 96 | 92 |
-| Detalhe | Mobile | 91 | 100 | 96 | 92 |
-| Detalhe | Desktop | 100 | 100 | 96 | 92 |
+| Página  | Perfil  | Performance | Accessibility | Best Practices | SEO |
+| ------- | ------- | ----------: | ------------: | -------------: | --: |
+| Home    | Mobile  |          90 |           100 |             96 |  92 |
+| Home    | Desktop |          99 |           100 |             96 |  92 |
+| Detalhe | Mobile  |          91 |           100 |             96 |  92 |
+| Detalhe | Desktop |         100 |           100 |             96 |  92 |
 
 LCP / CLS / TBT:
+
 - Home mobile: 3244ms / 0.000027 / 149ms.
 - Home desktop: 880ms / 0.000004 / 4ms.
 - Detalhe mobile: 2630ms / 0.087706 / 172ms.
@@ -110,3 +111,35 @@ Auditoria executada no build de produção local.
 - Algumas imagens são recortes provisórios do Figma.
 - Baselines visuais foram geradas no Chromium para Windows.
 - Os testes aprovados não cobrem todos os cenários avançados do desafio.
+
+## Contexto do desenvolvimento e aprendizado
+
+O KURIO foi desenvolvido como meu primeiro projeto web completo, a partir de um desafio técnico para uma oportunidade profissional na área de tecnologia.
+
+Meu objetivo foi ir além de uma interface visual e compreender as etapas necessárias para construir, testar e publicar uma aplicação web funcional. O projeto utiliza React, TypeScript, roteamento, gerenciamento de estado, APIs REST simuladas, testes automatizados e ferramentas de auditoria de desempenho.
+
+### Processo de desenvolvimento
+
+O desenvolvimento foi conduzido de maneira incremental, com consultas à documentação técnica e utilização de ferramentas de inteligência artificial como apoio à implementação, depuração e revisão.
+
+Durante esse processo, trabalhei na configuração do ambiente, execução e análise de testes, investigação de erros de renderização, ajustes de testes para interfaces responsivas, versionamento com Git, publicação no GitHub e Vercel e validação dos resultados.
+
+Entre os principais aprendizados estiveram a importância de não considerar uma aplicação concluída apenas porque sua interface aparece corretamente, a necessidade de tratar operações assíncronas e a diferença entre testes funcionais, regressão visual e auditorias de desempenho.
+
+### Validação e resultados
+
+O projeto passou pelo build de produção e por 24 testes funcionais com Playwright, distribuídos entre desktop e mobile. Também foram aprovadas oito comparações visuais automatizadas.
+
+As auditorias Lighthouse atingiram as metas estabelecidas para Performance, Accessibility, Best Practices e SEO nos cenários avaliados.
+
+Além disso, realizei verificações no domínio público, incluindo a conclusão manual de uma compra simulada com geração de recibo e a checagem de ausência de overflow horizontal em três páginas na largura de 768 px.
+
+Os resultados detalhados e os comandos de reprodução estão documentados nas seções anteriores.
+
+### Limitações e próximos passos
+
+Reconheço que o projeto ainda possui pontos que poderiam ser aprimorados, a cobertura automatizada de cenários avançados de Socket.IO e as validações de concorrência e reconexão.
+
+As integrações de pagamento, autenticação e carteira são demonstrativas, conforme o escopo do desafio, e não representam serviços financeiros reais.
+
+Este projeto marca uma etapa importante da minha formação prática. Mais do que apresentar uma aplicação publicada, meu objetivo foi desenvolver familiaridade com ferramentas e processos profissionais de desenvolvimento, identificar problemas concretos e aprender a validar soluções de maneira reproduzível.
