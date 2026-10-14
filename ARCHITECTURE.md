@@ -90,15 +90,22 @@ Cliente `socket.io-client`, transporte WebSocket (`transports:['websocket']`). H
 - Skeletons para catálogo, detalhe e carrinho (respeita `prefers-reduced-motion`).
 - Componentes `button`, `input` e `dialog` usam padrões de `shadcn/ui`; diálogo usa primitivos Radix para controle de foco.
 - Imagens têm texto alternativo. Inputs recebem labels. Alertas usam `role=alert` / `role=status`.
-- Auditar antes da submissão: 3 rodadas por página/perfil, reportar mediana e métricas LCP/CLS/TBT.
+- Auditoria Lighthouse executada com 3 rodadas por página/perfil, usando mediana e métricas LCP/CLS/TBT.
 
-## Pendências para cumprir 100% do desafio
+## Validação - 14/10/2026
 
-1. **Figma exato**: substituir visual provisório pelos frames e assets autorizados.
-2. **Instalação e compilação**: executar `npm install`, `npm run build`, `npm run lint` e reparar erros eventuais, ausentes por falta de registry npm no ambiente de autoria.
-3. **MSW + Socket.IO**: confirmar a compatibilidade de versões do binding em navegador local e publicado.
-4. **Testes**: complementar matriz completa de Playwright, incluindo baselines commitadas, reconexão, duplicatas, timeout e fluxo de recusa.
-5. **Performance**: executar script audit, atingir metas ou justificar divergências com dados reais.
-6. **Deploy**: URL pública validada e acessível; refresh de rotas e service worker funcionando.
-7. **Cenários avançados**: simular falhas em todas as APIs; conexão offline realista; teste de conflito com duas sessões; isolamento completo em abas múltiplas.
-8. **Acessibilidade**: revisão manual de teclado, zoom, semântica de elementos interativos e foco em drawers.
+- Build TypeScript/Vite aprovado.
+- Playwright funcional: 24/24 desktop e mobile.
+- Playwright visual: 8/8 comparações.
+- Lighthouse: metas atingidas nos quatro cenários.
+- GitHub e deploy Vercel publicados.
+- Relatórios Lighthouse gerados localmente em HTML/JSON.
+
+## Limitações técnicas restantes
+
+1. Socket.IO/MSW implementados, mas cenários E2E avançados de reconexão, duplicação e recuperação de pedidos não foram comprovados.
+2. Responsividade validada por Playwright em 390 e 1440px; 768px requer conferência separada.
+3. Assets locais podem divergir dos originais do Figma.
+4. Fluxo completo do site público ainda requer validação específica.
+5. Autenticação, persistência, carteiras e pagamentos são demonstrativos, sem backend financeiro real.
+6. Concorrência entre abas e sessões simultâneas não possui cobertura completa comprovada.

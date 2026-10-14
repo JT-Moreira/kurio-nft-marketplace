@@ -2,7 +2,7 @@
 
 Protótipo de marketplace React + TypeScript, **somente dados simulados**. Checkout, senhas, endereços e referências de transação não são reais.
 
-> **Status**: versão visual KURIO v2 baseada nos prints fornecidos, com backend mockado em desenvolvimento. **Não é uma entrega certificada/pronta para submissão.** Ainda deve ser instalado, executado, depurado, adaptado ao Figma, testado e auditado. O ambiente onde o arquivo foi gerado não acessa o registry npm nem o Figma, logo as dependências não foram baixadas e não foi possível executar `npm run build`, Playwright ou Lighthouse.
+> **Status em 14/10/2026:** publicado no GitHub e Vercel. Build, 24 testes funcionais, 8 testes visuais e metas Lighthouse aprovados localmente.
 
 ## Executar no Windows (PowerShell / terminal VS Code)
 
@@ -65,7 +65,7 @@ Clique em **Cenários de teste** no menu. Há opções de rede lenta, respostas 
 1. Abra o repositório no GitHub (sem chaves e sem `.env.local`).
 2. Importe em [Vercel](https://vercel.com/).
 3. Framework: **Vite**; build `npm run build`; output `dist`.
-4. Ambiente: `VITE_ENABLE_MOCKS=true`, `VITE_SOCKET_URL=ws://localhost:8788` (endereço fictício capturado pelo MSW no próprio navegador; não é backend na nuvem).
+4. Ambiente: `VITE_ENABLE_MOCKS=true`. Deixe `VITE_SOCKET_URL` sem definir para usar a origem do site.
 5. Teste diretamente `/nft/nft-01` e `/cart` após refresh. `vercel.json` garante SPA fallback.
 
 Não confunda o `VITE_SOCKET_URL` com um servidor de rede existente: o Service Worker / interceptação MSW deve capturar o WebSocket simulado conforme a compatibilidade da biblioteca instalada.
@@ -74,22 +74,39 @@ Não confunda o `VITE_SOCKET_URL` com um servidor de rede existente: o Service W
 
 **Visual atualizado:** a referência foi extraída dos prints desktop/mobile enviados: identidade KURIO, cores cobre/marrom, novo layout da página inicial, sidebar desktop, grade mobile e retratos locais. As imagens de personagens são RECORTES DOS PRINTS, não assets originais do Figma, e possuem resolução limitada. O restante das telas reutiliza o tema mas precisa de uma conferência visual comparando cada frame. Exportar imagens originais do Figma antes da entrega final, se possível.
 
-## Limitações conhecidas e pendências
+## Resultados comprovados - 14/10/2026
 
-- Não há lockfile no arquivo original porque o registry npm não estava disponível no ambiente de geração; crie e versione com `npm install`.
-- Playwright possui fluxos e casos visuais iniciais; **é obrigatório executar os testes, corrigir flakiness e criar/versionar baselines** (`npx playwright test --update-snapshots`).
-- Falta ampliar regressão visual para checkout e cobertura de cenários terminais, reconexão e eventos antigos.
-- A URL pública não foi publicada; a entrega exige deploy funcionando.
-- A simulação da carteira cobre conexão, recusa e desconexão no cliente. Não usa extensões de blockchain, por exigência do desafio.
-- As latências/falhas determinísticas são um ponto de partida e devem ser expandidas para recursos além do catálogo.
-- O manuseio de estoque e pedidos na persistência local é demonstrativo, não substitui transações de banco concorrentes.
-- Não foi possível executar build e auditorias sem instalar dependências. **Valide a integração Socket.IO + MSW instalada antes de apresentar como concluída.**
+- Build TypeScript/Vite: aprovado.
+- Playwright desktop 1440px: 12/12.
+- Playwright mobile 390px: 12/12.
+- Regressão visual: 8/8, baselines versionadas.
+- GitHub: https://github.com/JT-Moreira/kurio-nft-marketplace
+- Deploy: https://kurio-nft-marketplace-weld.vercel.app/
 
-Consulte `ARCHITECTURE.md` para contratos, cache, ciclo de dados e pendências.
+### Lighthouse - mediana de 3 medições por cenário
 
-## Status das telas do Figma
+| Página | Perfil | Performance | Accessibility | Best Practices | SEO |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Home | Mobile | 90 | 100 | 96 | 92 |
+| Home | Desktop | 99 | 100 | 96 | 92 |
+| Detalhe | Mobile | 91 | 100 | 96 | 92 |
+| Detalhe | Desktop | 100 | 100 | 96 | 92 |
 
-- Início desktop/mobile: estrutura visual revisada, sidebar, hero, cards, editorial e benefícios.
-- Detalhe, carrinho, checkout, pedido, login, cadastro, perfil e carteiras: mantêm os fluxos da base anterior e agora herdam cores/tipografia de KURIO. Ainda é necessário alinhar suas composições aos screenshots individuais.
-- Os quatro retratos WEBP são recortes temporários dos prints fornecidos pelo candidato. Para fidelidade real e pontuação Lighthouse, exportar assets nativos otimizados do Figma é recomendado.
-- O CSS possui padrões responsivos para 390, 768 e 1440px, mas não foi auditado em navegador neste ambiente.
+LCP / CLS / TBT:
+- Home mobile: 3244ms / 0.000027 / 149ms.
+- Home desktop: 880ms / 0.000004 / 4ms.
+- Detalhe mobile: 2630ms / 0.087706 / 172ms.
+- Detalhe desktop: 715ms / 0.040985 / 0ms.
+
+Relatórios HTML/JSON gerados localmente em `lighthouse-reports/`.
+Auditoria executada no build de produção local.
+
+## Limitações e verificações pendentes
+
+- Pagamentos, carteiras e autenticação são simulados.
+- Reconexão Socket.IO, eventos antigos e duplicados não possuem testes E2E específicos comprovados.
+- Viewport de 768px ainda não foi verificado separadamente.
+- Fluxo completo no domínio público não foi automatizado.
+- Algumas imagens são recortes provisórios do Figma.
+- Baselines visuais foram geradas no Chromium para Windows.
+- Os testes aprovados não cobrem todos os cenários avançados do desafio.
